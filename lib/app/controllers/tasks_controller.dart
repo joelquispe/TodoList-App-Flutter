@@ -1,7 +1,38 @@
-
+import 'package:apptask/app/controllers/initialize_controller.dart';
+import 'package:apptask/app/data/models/task.model.dart';
+import 'package:apptask/app/data/models/user.model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class TasksController extends GetxController {
+  late GlobalKey<FormState> formkey;
+  final putInit = Get.put(InitializeController());
 
+  final controllerTitle = TextEditingController().obs;
+  final controllerDescription = TextEditingController().obs;
+
+  var selectPriority = Rxn<String>();
+  RxString selectUser = "".obs;
+  void createTask() {
+    Task task = new Task();
+    UserModel userModel = new UserModel();
+    task.title = controllerTitle.value.text;
+    task.descripcion = controllerDescription.value.text;
+    task.priority = selectPriority.value;
+    task.userModel = userModel;
+
+    putInit.listTask.value.add(task);
+    putInit.itemCount.value = putInit.listTask.value.length;
+    print(putInit.listTask.value);
+    controllerTitle.value.clear();
+    controllerDescription.value.clear();
+    selectPriority.value = null;
+  }
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    formkey = GlobalKey<FormState>();
+  }
 }
-  

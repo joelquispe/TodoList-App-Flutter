@@ -1,3 +1,4 @@
+import 'package:apptask/app/controllers/tasks_controller.dart';
 import 'package:apptask/app/routes/app_routes.dart';
 import 'package:apptask/app/ui/pages/tasks_page/tasks_page.dart';
 import 'package:apptask/app/ui/pages/users_page/users_page.dart';
@@ -11,6 +12,7 @@ import '../../../controllers/initialize_controller.dart';
 class InitializePage extends GetView<InitializeController> {
   @override
   Widget build(BuildContext context) {
+    final putTask = Get.put(TasksController());
     return Scaffold(
         body: CustomScrollView(
           slivers: [
@@ -79,55 +81,59 @@ class InitializePage extends GetView<InitializeController> {
                       );
                     }),
                   ),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemCount: 20,
-                    itemBuilder: ((context, index) {
-                      return Card(
-                        elevation: 9,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 5),
-                          child: ListTile(
-                            leading: Icon(Icons.person),
-                            trailing: PopupMenuButton(itemBuilder: ((context) {
-                              return [
-                                PopupMenuItem(
-                                    value: 1,
-                                    onTap: () {},
-                                    child: Text("Editar")),
-                                PopupMenuItem(
-                                  value: 2,
-                                  child: Text("Eliminar"),
-                                  onTap: () {
-                                    Get.dialog(Text("Usuario eliminado"));
-                                  },
-                                ),
-                              ];
-                            }), onSelected: (value) {
-                              switch (value) {
-                                case 1:
-                                  Get.bottomSheet(
-                                    Container(
-                                      height: Get.height / 2,
-                                      child: Column(
-                                        children: [TextFormField()],
-                                      ),
+                  Obx((() => ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: controller.itemCount.value,
+                        itemBuilder: ((context, index) {
+                          return Card(
+                            elevation: 9,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              child: ListTile(
+                                leading: Icon(Icons.person),
+                                trailing:
+                                    PopupMenuButton(itemBuilder: ((context) {
+                                  return [
+                                    PopupMenuItem(
+                                        value: 1,
+                                        onTap: () {},
+                                        child: Text("Editar")),
+                                    PopupMenuItem(
+                                      value: 2,
+                                      child: Text("Eliminar"),
                                     ),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                  );
-                                  break;
-                              }
-                            }),
-                            title: Text("${index}"),
-                            subtitle: Text("Descripción"),
-                          ),
-                        ),
-                      );
-                    }),
-                  )
+                                  ];
+                                }), onSelected: (value) {
+                                  switch (value) {
+                                    case 1:
+                                      Get.bottomSheet(
+                                        Container(
+                                          height: Get.height / 2,
+                                          child: Column(
+                                            children: [TextFormField()],
+                                          ),
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                      );
+                                      break;
+                                    case 2:
+                                      controller.deleteTask(controller.listTask.value[index]);
+                                      break;
+                                  }
+                                }),
+                                title: Text(
+                                    "${controller.listTask.value[index].title}"),
+                                subtitle: Text(
+                                    "${controller.listTask.value[index].descripcion}"),
+                              ),
+                            ),
+                          );
+                        }),
+                      )))
                 ]),
               ),
             ),
@@ -146,8 +152,8 @@ class InitializePage extends GetView<InitializeController> {
               foregroundColor: Colors.black,
               backgroundColor: Colors.blue[100],
               label: 'Agregar Usuario',
-              onPressed: () {
-                Get.toNamed(Routes.TASK);
+              onPressed: () async {
+                await Get.toNamed(Routes.TASK);
               },
             ),
             SpeedDialChild(
