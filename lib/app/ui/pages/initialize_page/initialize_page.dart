@@ -68,19 +68,8 @@ class InitializePage extends GetView<InitializeController> {
                 height: Get.height,
                 child:
                     TabBarView(controller: controller.tabController, children: [
-                  ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemCount: 10,
-                    itemBuilder: ((context, index) {
-                      return ListTile(
-                        onTap: () {
-                          Get.dialog(Text("joel"));
-                        },
-                        title: Text("${index}"),
-                      );
-                    }),
-                  ),
+                     
+                 
                   Obx((() => ListView.builder(
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
@@ -133,7 +122,60 @@ class InitializePage extends GetView<InitializeController> {
                             ),
                           );
                         }),
-                      )))
+                      ))),
+                       Obx(()=>  ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: controller.itemCountUser.value,
+                    itemBuilder: ((context, index) {
+                      return Card(
+                            elevation: 9,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              child: ListTile(
+                                leading: Icon(Icons.person),
+                                trailing:
+                                    PopupMenuButton(itemBuilder: ((context) {
+                                  return [
+                                    PopupMenuItem(
+                                        value: 1,
+                                        onTap: () {},
+                                        child: Text("Editar")),
+                                    PopupMenuItem(
+                                      value: 2,
+                                      child: Text("Eliminar"),
+                                    ),
+                                  ];
+                                }), onSelected: (value) {
+                                  switch (value) {
+                                    case 1:
+                                      Get.bottomSheet(
+                                        Container(
+                                          height: Get.height / 2,
+                                          child: Column(
+                                            children: [TextFormField()],
+                                          ),
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                      );
+                                      break;
+                                    case 2:
+                                      controller.deleteUser(controller.listUsers.value[index]);
+                                      break;
+                                  }
+                                }),
+                                title: Text(
+                                    "${controller.listUsers.value[index].name}"),
+                                subtitle: Text(
+                                    "${controller.listUsers.value[index].lastname}"),
+                              ),
+                            ),
+                          );
+                    }),
+                  ),),
                 ]),
               ),
             ),
@@ -153,7 +195,7 @@ class InitializePage extends GetView<InitializeController> {
               backgroundColor: Colors.blue[100],
               label: 'Agregar Usuario',
               onPressed: () async {
-                await Get.toNamed(Routes.TASK);
+                Get.toNamed(Routes.USER);
               },
             ),
             SpeedDialChild(
@@ -163,6 +205,7 @@ class InitializePage extends GetView<InitializeController> {
               label: 'Agregar tarea',
               onPressed: () {
                 Get.toNamed(Routes.TASK);
+                
               },
             ),
             //  Your other SpeedDialChildren go here.

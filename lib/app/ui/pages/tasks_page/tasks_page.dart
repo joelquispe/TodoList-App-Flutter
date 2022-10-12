@@ -2,6 +2,7 @@ import 'package:apptask/app/ui/global_widgets/buttonSubmit.widget.dart';
 import 'package:apptask/app/ui/global_widgets/textField.widget.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import '../../../controllers/tasks_controller.dart';
@@ -9,7 +10,6 @@ import '../../../controllers/tasks_controller.dart';
 class TasksPage extends GetView<TasksController> {
   @override
   Widget build(BuildContext context) {
-    
     final fkey = GlobalKey<FormState>();
     return Scaffold(
         body: SafeArea(
@@ -84,7 +84,6 @@ class TasksPage extends GetView<TasksController> {
               ),
               DropdownButton2(
                 isExpanded: true,
-                
                 onChanged: (value) {
                   print(value);
                 },
@@ -129,9 +128,14 @@ class TasksPage extends GetView<TasksController> {
                           pressed: () {
                             if (fkey.currentState!.validate()) {
                               controller.createTask();
+                              Fluttertoast.showToast(
+                                  msg: "Tarea creado correctamente",
+                                  backgroundColor: Colors.deepPurple,
+                                  textColor: Colors.white);
+                              Get.back();
+
                               print("paso");
                             }
-                            
                           },
                           texto: "Crear Tarea",
                         ),

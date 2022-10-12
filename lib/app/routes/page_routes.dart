@@ -13,8 +13,8 @@ import 'package:get/get.dart';
 abstract class AppPages {
 
   static final pages = [
-    GetPage(name: Routes.INITIALIZE, page:()=> InitializePage(),binding: InitializeBinding()),
-    GetPage(name: Routes.SPLASH, page:()=> SplashPage(), binding:SplashBinding() ),
+    GetPage(name: Routes.INITIALIZE, page:()=> InitializePage(),binding: InitializeBinding(),transition: Transition.upToDown),
+    GetPage(name: Routes.SPLASH, page:()=> SplashPage(), binding:SplashBinding(),transition: Transition.fadeIn ),
     GetPage(name: Routes.TASK, page: ()=> TasksPage(),binding: TasksBinding(),transition: Transition.downToUp),
     GetPage(name: Routes.USER, page:()=> UsersPage(), binding:UsersBinding() ,transition: Transition.downToUp),
   ];

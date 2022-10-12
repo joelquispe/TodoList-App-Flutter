@@ -3,6 +3,7 @@ import 'package:apptask/app/data/models/task.model.dart';
 import 'package:apptask/app/data/models/user.model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
 
 class TasksController extends GetxController {
   late GlobalKey<FormState> formkey;
@@ -16,6 +17,7 @@ class TasksController extends GetxController {
   void createTask() {
     Task task = new Task();
     UserModel userModel = new UserModel();
+    task.id = Uuid().v4();
     task.title = controllerTitle.value.text;
     task.descripcion = controllerDescription.value.text;
     task.priority = selectPriority.value;
