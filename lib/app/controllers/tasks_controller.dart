@@ -8,12 +8,13 @@ import 'package:uuid/uuid.dart';
 class TasksController extends GetxController {
   late GlobalKey<FormState> formkey;
   final putInit = Get.put(InitializeController());
-
+  RxList<UserModel> users = RxList<UserModel>();
   final controllerTitle = TextEditingController().obs;
   final controllerDescription = TextEditingController().obs;
 
   var selectPriority = Rxn<String>();
   RxString selectUser = "".obs;
+
   void createTask() {
     Task task = new Task();
     UserModel userModel = new UserModel();
@@ -35,6 +36,13 @@ class TasksController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    print("====================");
     formkey = GlobalKey<FormState>();
+    print(putInit.listUsers.value);
+    if (putInit.itemCountUser.value > 0) {
+      users.value = putInit.listUsers.value;
+    }
   }
+
+  
 }

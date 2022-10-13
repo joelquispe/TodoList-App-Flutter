@@ -1,3 +1,4 @@
+import 'package:apptask/app/data/models/user.model.dart';
 import 'package:apptask/app/ui/global_widgets/buttonSubmit.widget.dart';
 import 'package:apptask/app/ui/global_widgets/textField.widget.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -99,20 +100,7 @@ class TasksPage extends GetView<TasksController> {
                 hint: Text("Usuario",
                     style: TextStyle(color: Colors.deepPurple.shade900)),
                 style: TextStyle(color: Colors.deepPurple[600]),
-                items: [
-                  DropdownMenuItem(
-                    child: Text("Vacio"),
-                    value: 1,
-                  ),
-                  DropdownMenuItem(
-                    child: Text("Jose"),
-                    value: 2,
-                  ),
-                  DropdownMenuItem(
-                    child: Text("Maria"),
-                    value: 3,
-                  )
-                ],
+                items: controller.users.value.map((e) => DropdownMenuItem<UserModel>(child: Text(e.name!))).toList(),
               ),
               SizedBox(
                 height: 4.h,

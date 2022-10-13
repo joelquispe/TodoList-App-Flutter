@@ -80,7 +80,12 @@ class InitializePage extends GetView<InitializeController> {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 5),
                               child: ListTile(
-                                leading: Icon(Icons.person),
+                                leading: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    FaIcon(FontAwesomeIcons.clipboard),
+                                  ],
+                                ),
                                 trailing:
                                     PopupMenuButton(itemBuilder: ((context) {
                                   return [
@@ -133,7 +138,12 @@ class InitializePage extends GetView<InitializeController> {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 5),
                               child: ListTile(
-                                leading: Icon(Icons.person),
+                                leading: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.person),
+                                  ],
+                                ),
                                 trailing:
                                     PopupMenuButton(itemBuilder: ((context) {
                                   return [
