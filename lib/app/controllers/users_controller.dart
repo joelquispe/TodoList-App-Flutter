@@ -16,8 +16,7 @@ class UsersController extends GetxController {
     userModel.id = Uuid().v4();
     userModel.name = controllerName.value.text;
     userModel.lastname = controllerLastName.value.text;
-    userModel.phone = controllerPhone.value.text;
-    userModel.email = controllerEmail.value.text;
+    
     putInit.listUsers.value.add(userModel);
     putInit.itemCountUser.value = putInit.listUsers.value.length;
   }

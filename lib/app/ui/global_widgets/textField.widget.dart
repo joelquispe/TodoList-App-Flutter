@@ -1,26 +1,40 @@
 import 'package:flutter/material.dart';
+
 class TextFieldWidget extends StatelessWidget {
   final String? wlabeltext;
   final String? whinttext;
   final TextEditingController? wcontroller;
   final String? Function(String?)? validation;
-const TextFieldWidget({ Key? key ,this.wcontroller,this.whinttext,this.wlabeltext,this.validation}) : super(key: key);
+  final int? maxlines;
+  const TextFieldWidget(
+      {Key? key,
+      this.wcontroller,
+      this.whinttext,
+      this.wlabeltext,
+      this.validation,this.maxlines})
+      : super(key: key);
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return TextFormField(
-      controller: wcontroller ,
+      controller: wcontroller,
       validator: validation,
+      maxLines: maxlines,
       decoration: InputDecoration(
-        
-        labelStyle: TextStyle(fontWeight: FontWeight.bold,color: Colors.deepPurple.shade600),
-        prefixIcon: Icon(Icons.text_fields,color: Colors.deepPurple.shade900,),
-        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.purple)),
-        border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.purple)),
-        enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.purple)),
+        labelStyle: TextStyle(
+            fontWeight: FontWeight.bold, color: Colors.deepPurple.shade600),
+        prefixIcon: Icon(
+          Icons.text_fields,
+          color: Colors.deepPurple.shade900,
+        ),
+        focusedBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.purple)),
+        border:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.purple)),
+        enabledBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.purple)),
         labelText: wlabeltext,
         hintText: whinttext,
-        
       ),
     );
   }

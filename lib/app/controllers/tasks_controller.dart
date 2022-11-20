@@ -13,7 +13,8 @@ class TasksController extends GetxController {
   final controllerDescription = TextEditingController().obs;
 
   var selectPriority = Rxn<String>();
-  RxString selectUser = "".obs;
+  var selectUser = Rxn<UserModel>();
+ 
 
   void createTask() {
     Task task = new Task();
@@ -22,7 +23,7 @@ class TasksController extends GetxController {
     task.title = controllerTitle.value.text;
     task.descripcion = controllerDescription.value.text;
     task.priority = selectPriority.value;
-    task.userModel = userModel;
+    task.userModel = selectUser.value;
 
     putInit.listTask.value.add(task);
     putInit.itemCount.value = putInit.listTask.value.length;
@@ -43,6 +44,4 @@ class TasksController extends GetxController {
       users.value = putInit.listUsers.value;
     }
   }
-
-  
 }

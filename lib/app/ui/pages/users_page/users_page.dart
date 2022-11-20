@@ -43,29 +43,7 @@ class UsersPage extends GetView<UsersController> {
                   return value!.isEmpty ? "Llenar campo" : null;
                 },
               ),
-              SizedBox(
-                height: 2.h,
-              ),
-              TextFieldWidget(
-                wcontroller: controller.controllerPhone.value,
-                whinttext: "Ingrese un teléfono",
-                wlabeltext: "Teléfono",
-                validation: (value) {
-                  return value!.isEmpty ? "Llenar campo" : null;
-                },
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              TextFieldWidget(
-                wcontroller: controller.controllerEmail.value,
-                whinttext: "Ingrese un correo",
-                wlabeltext: "Correo",
-                validation: (value) {
-                  return value!.isEmpty ? "Llenar campo" : null;
-                },
-              ),
-              
+             
              
               SizedBox(
                 height: 4.h,
