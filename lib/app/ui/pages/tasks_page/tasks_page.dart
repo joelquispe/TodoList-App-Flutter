@@ -36,7 +36,7 @@ class TasksPage extends GetView<TasksController> {
                   height: 2.h,
                 ),
                 TextFieldWidget(
-                  maxlines: 6,
+                    maxlines: 6,
                     validation: (value) {
                       return value!.isEmpty ? "Llenar campo" : null;
                     },
@@ -85,31 +85,28 @@ class TasksPage extends GetView<TasksController> {
                 SizedBox(
                   height: 2.h,
                 ),
-                Obx(()=> DropdownButton2(
-                  isExpanded: true,
-                  onChanged: (value) {
-                    print(value);
-                    controller.selectUser.value = value as UserModel?;
-                  },
-                  value: controller.selectUser.value,
-                  itemHeight: 60,
-                  iconEnabledColor: Colors.deepPurple,
-                  selectedItemHighlightColor: Colors.purple[100],
-                  buttonElevation: 8,
-                  dropdownElevation: 9,
-                  underline: Container(
-                    color: Colors.purple,
-                    height: 1,
+                Obx(
+                  () => DropdownButton2(
+                    isExpanded: true,
+                    onChanged: (value) {
+                      print(value);
+                      controller.selectUser.value = value as UserModel?;
+                    },
+                    value: controller.selectUser.value,
+                    itemHeight: 60,
+                    iconEnabledColor: Colors.deepPurple,
+                    selectedItemHighlightColor: Colors.purple[100],
+                    buttonElevation: 8,
+                    dropdownElevation: 9,
+                    underline: Container(
+                      color: Colors.purple,
+                      height: 1,
+                    ),
+                    hint: Text("Usuario", style: TextStyle(color: Colors.deepPurple.shade900)),
+                    style: TextStyle(color: Colors.deepPurple[600]),
+                    items: controller.users.value.map((e) => DropdownMenuItem<UserModel>(value: e, child: Text(e.name!))).toList(),
                   ),
-                  hint: Text("Usuario",
-                      style: TextStyle(color: Colors.deepPurple.shade900)),
-                  style: TextStyle(color: Colors.deepPurple[600]),
-                  items: controller.users.value
-                      .map((e) => DropdownMenuItem<UserModel>(
-                          value: e, child: Text(e.name!)))
-                      .toList(),
-                ),),
-                
+                ),
                 SizedBox(
                   height: 4.h,
                 ),
@@ -125,11 +122,9 @@ class TasksPage extends GetView<TasksController> {
                               if (fkey.currentState!.validate()) {
                                 controller.createTask();
                                 Fluttertoast.showToast(
-                                    msg: "Tarea creado correctamente",
-                                    backgroundColor: Colors.deepPurple,
-                                    textColor: Colors.white);
+                                    msg: "Tarea creado correctamente", backgroundColor: Colors.deepPurple, textColor: Colors.white);
                                 Get.back();
-      
+
                                 print("paso");
                               }
                             },
@@ -143,7 +138,7 @@ class TasksPage extends GetView<TasksController> {
                             onPressed: () {
                               Get.back();
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.arrow_back_ios,
                               color: Colors.deepPurple,
                             )),

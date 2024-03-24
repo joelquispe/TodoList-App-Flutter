@@ -1,7 +1,6 @@
 
 import 'package:apptask/app/ui/global_widgets/buttonSubmit.widget.dart';
 import 'package:apptask/app/ui/global_widgets/textField.widget.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
